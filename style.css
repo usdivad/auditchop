@@ -1,0 +1,62 @@
+body {
+	-webkit-user-select: none;
+	margin-top: 40px;
+}
+
+#touch_content {
+	width: 400px;
+	margin: auto;
+}
+
+#north, #south {
+	float:none;
+	margin: auto;
+}
+
+#box_nw {
+	width: 200px;
+	height: 200px;
+	background-color: green;
+	margin: auto;
+	float:left;
+}
+
+#box_nw:active {
+	background-color: orange;
+}
+
+#box_ne {
+	width: 200px;
+	height: 200px;
+	background-color: red;
+	margin: auto;
+	float:left;
+}
+
+#box_ne:active {
+	background-color: purple;
+}
+
+#box_sw {
+	width: 200px;
+	height: 200px;
+	background-color: purple;
+	margin: auto;
+	float:left;
+}
+
+#box_sw:active {
+	background-color: red;
+}
+
+#box_se {
+	width: 200px;
+	height: 200px;
+	background-color: orange;
+	margin: auto;
+	float:left;
+}
+
+#box_se:active {
+	background-color: green;
+}
