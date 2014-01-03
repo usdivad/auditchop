@@ -13,6 +13,12 @@ body {
 	margin: auto;
 }
 
+/*
+#box_nw, #box_ne, #box_se, #box_sw {
+	opacity: 0;
+}
+*/
+
 #box_nw {
 	width: 200px;
 	height: 200px;
