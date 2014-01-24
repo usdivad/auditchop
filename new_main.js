@@ -1,11 +1,8 @@
 (function() {
-	//NW
-	var osc_nw = T("konami");
-	var env_nw = T("adsr", {a:10, d:300, s:0.25, r:700});
-	var oe_nw = T("OscGen", {osc:osc_nw, env:env_nw, mul:0.4});
-	oe_nw.play();
-	play_nw();
-	//oe_nw.start();
+
+	var osc_nw;
+	var env_nw;
+	var oe_nw;
 
 	//var box_nw = document.getElementById("box_nw");
 	$("#box_nw").bind("touchstart mousedown", function(e) {
@@ -27,9 +24,9 @@
 	});
 
 	function play_nw() {
-		/*osc_nw = T("konami");
+		osc_nw = T("konami");
 		env_nw = T("adsr", {a:10, d:300, s:0.25, r:700});
-		oe_nw = T("OscGen", {osc:osc_nw, env:env_nw, mul:0.4}).play();*/
+		oe_nw = T("OscGen", {osc:osc_nw, env:env_nw, mul:0.4}).play();
 		oe_nw.noteOn(80, 100);
 		console.log("play");
 		console.log(oe_nw);
