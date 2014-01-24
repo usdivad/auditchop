@@ -61,8 +61,8 @@
 	//var timerOn = false;
 
 	//timers
-	var timer_nw, timer_ne;
-	/*
+	//var timer_nw, timer_ne;
+	
 	var timer_nw = T("interval", {interval:interval_nw}, function(count) {
 		//oe.noteOff(noteNum); //last noteNum from prev interval bang
 		var noteNum = pitches_nw[Math.floor(Math.random()*pitches_nw.length)] - (12*Math.floor(Math.random()*4));
@@ -80,7 +80,7 @@
 		//	console.log(noteNum+" off");
 		//}, interval_ne*1.1);
 	});
-	*/
+	
 
 
 	/*
