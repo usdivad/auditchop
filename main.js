@@ -4,16 +4,24 @@
 	 *
 	 */
 	//NW
+	var osc_nw, env_nw, oe_nw;
+	/*
 	var osc_nw = T("konami");
 	var env_nw = T("adsr", {a:10, d:300, s:0.25, r:700});
 	var oe_nw = T("OscGen", {osc:osc_nw, env:env_nw, mul:0.4}).play();
+	*/
 
 	//SE
+	var osc_se, env_se, oe_se;
+	/*
 	var osc_se = T("konami");
 	var env_se = T("adsr", {a:500, d:500, s:1, r:1500});
 	var oe_se = T("OscGen", {osc:osc_se, env:env_se, mul:0.4}).play();
+	*/
 
 	//NE
+	var osc_ne, env_ne, oe_ne, delay_ne, delay_ne_2;
+	/*
 	var osc_ne = T("sin");
 	//var env_ne = T("adsr", {a:100,d:250,s:0.6,r:500});
 	var env_ne = T("adsr", {a:50, d:300, s:0.1, r:500});
@@ -21,11 +29,15 @@
 	var oe_ne = T("OscGen", {osc:osc_ne, env:env_ne, mul:0.5}).play();
 	var delay_ne = T("delay", {time:500, fb:0, mix:0.5}, oe_ne).play();
 	var delay_ne_2 = T("delay", {time:750, fb:0, mix:0.25}, oe_ne).play();
+	*/
 
 	//SW
+	var osc_sw, env_sw, oe_sw;
+	/*
 	var osc_sw = T("sin");
 	var env_sw = T("adsr", {a:300, d:500, s:1, r:2000});
 	var oe_sw = T("OscGen", {osc:osc_sw, env:env_sw, mul:0.75}).play();
+	*/
 
 	//testing fx
 	//T("phaser", {freq:osc_nw, Q:1, steps:8}, oe_se).play();
@@ -46,9 +58,11 @@
 	var pitches_sw = pitches_se;
 	var interval_nw = 150;
 	var interval_ne = 225;
-	var timerOn = false;
+	//var timerOn = false;
 
 	//timers
+	var timer_nw, timer_ne;
+	/*
 	var timer_nw = T("interval", {interval:interval_nw}, function(count) {
 		//oe.noteOff(noteNum); //last noteNum from prev interval bang
 		var noteNum = pitches_nw[Math.floor(Math.random()*pitches_nw.length)] - (12*Math.floor(Math.random()*4));
@@ -61,11 +75,13 @@
 		var noteNum = pitches_ne[Math.floor(Math.random()*pitches_ne.length)] +12; //+ (12*Math.floor(Math.random()*2));
 		var velocity = Math.random()*50 + 50;
 		oe_ne.noteOn(noteNum, velocity);
-		/*setTimeout(function() {
-			oe_ne.noteOff(noteNum);
-			console.log(noteNum+" off");
-		}, interval_ne*1.1);*/
+		//setTimeout(function() {
+		//	oe_ne.noteOff(noteNum);
+		//	console.log(noteNum+" off");
+		//}, interval_ne*1.1);
 	});
+	*/
+
 
 	/*
 	 * CONTROL PARAMS
@@ -91,6 +107,7 @@
 	//f0r  touch(multi) and desktop
 	//e.stopPropagation(); e.preventDefault(); prevents double-trigger on mobile
 	$("#box_nw").bind("touchstart mousedown", function(e) {
+		console.log(pitches_nw);
 		play_nw();
 		//window.setTimeout(function() {
 			$("#box_nw").style.color = "orange";
