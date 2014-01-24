@@ -174,9 +174,11 @@
 	 */
 	function play_se() {
 		//Creation
-		osc_se = T("konami");
-		env_se = T("adsr", {a:500, d:500, s:1, r:1500});
-		oe_se = T("OscGen", {osc:osc_se, env:env_se, mul:0.4}).play();
+		if (typeof oe_se == "undefined") {
+			osc_se = T("konami");
+			env_se = T("adsr", {a:500, d:500, s:1, r:1500});
+			oe_se = T("OscGen", {osc:osc_se, env:env_se, mul:0.4}).play();
+		}
 
 		//oe_se.allNoteOff();
 		var n = pitches_se[Math.floor(Math.random()*pitches_se.length)] - 36;
@@ -202,9 +204,11 @@
 
 	function play_nw() {
 		//Creation: synth
-		osc_nw = T("konami");
-		env_nw = T("adsr", {a:10, d:300, s:0.25, r:700});
-		oe_nw = T("OscGen", {osc:osc_nw, env:env_nw, mul:0.4}).play();
+		if (typeof oe_nw == "undefined") {
+			osc_nw = T("konami");
+			env_nw = T("adsr", {a:10, d:300, s:0.25, r:700});
+			oe_nw = T("OscGen", {osc:osc_nw, env:env_nw, mul:0.4}).play();
+		}
 
 
 		//if (!timerOn) {
@@ -215,19 +219,20 @@
 
 	function pause_nw() {
 		oe_nw.allNoteOff();
-		timer_nw.stop()
+		timer_nw.stop();
 	}
 
 	function play_ne() {
 		//Creation: synth
-		 osc_ne = T("sin");
-		// env_ne = T("adsr", {a:100,d:250,s:0.6,r:500});
-		 env_ne = T("adsr", {a:50, d:300, s:0.1, r:500});
-		// env_ne = T("perc", {a:50, r:300});
-		 oe_ne = T("OscGen", {osc:osc_ne, env:env_ne, mul:0.5}).play();
-		 delay_ne = T("delay", {time:500, fb:0, mix:0.5}, oe_ne).play();
-		 delay_ne_2 = T("delay", {time:750, fb:0, mix:0.25}, oe_ne).play();
-
+		if (typeof osc_ne == "undefined") {
+			 osc_ne = T("sin");
+			// env_ne = T("adsr", {a:100,d:250,s:0.6,r:500});
+			 env_ne = T("adsr", {a:50, d:300, s:0.1, r:500});
+			// env_ne = T("perc", {a:50, r:300});
+			 oe_ne = T("OscGen", {osc:osc_ne, env:env_ne, mul:0.5}).play();
+			 delay_ne = T("delay", {time:500, fb:0, mix:0.5}, oe_ne).play();
+			 delay_ne_2 = T("delay", {time:750, fb:0, mix:0.25}, oe_ne).play();
+		}
 
 		//if (!timerOn) {
 			timer_ne.start();
@@ -242,9 +247,11 @@
 
 	function play_sw() {
 		//Creation
-		osc_sw = T("sin");
-		env_sw = T("adsr", {a:300, d:500, s:1, r:2000});
-		oe_sw = T("OscGen", {osc:osc_sw, env:env_sw, mul:0.75}).play();
+		if (typeof osc_sw == "undefined") {
+			osc_sw = T("sin");
+			env_sw = T("adsr", {a:300, d:500, s:1, r:2000});
+			oe_sw = T("OscGen", {osc:osc_sw, env:env_sw, mul:0.75}).play();
+		}
 
 
 		var n = pitches_sw[Math.floor(Math.random()*pitches_sw.length)];
