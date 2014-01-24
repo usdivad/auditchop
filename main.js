@@ -1,8 +1,8 @@
+(function() {
 	/*
 	 * SYNTHS
 	 *
 	 */
-(function() {
 	//NW
 	var osc_nw = T("konami");
 	var env_nw = T("adsr", {a:10, d:300, s:0.25, r:700});
@@ -65,15 +65,17 @@
 			oe_ne.noteOff(noteNum);
 			console.log(noteNum+" off");
 		}, interval_ne*1.1);*/
-	})
+	});
 
 	/*
 	 * CONTROL PARAMS
 	 */
+	/*
 	var box_nw = document.getElementById("box_nw");
 	var box_se = document.getElementById("box_se");
 	var box_ne = document.getElementById("box_ne");
 	var box_sw = document.getElementById("box_sw");
+	*/
 
 	//prevent scrolling
 	document.body.addEventListener("touchmove", function(e) {
@@ -91,7 +93,7 @@
 	$("#box_nw").bind("touchstart mousedown", function(e) {
 		play_nw();
 		//window.setTimeout(function() {
-			box_nw.style.color = "orange";
+			$("#box_nw").style.color = "orange";
 		//}, 50);
 		e.stopPropagation();
 		e.preventDefault();
@@ -109,43 +111,43 @@
 	})*/
 	$("#box_nw").bind("touchend mouseup", function(e) {
 		pause_nw();
-		box_nw.style.color = "green";
+		$("#box_nw").style.color = "green";
 		e.stopPropagation();
 		e.preventDefault();
 	});
 	$("#box_se").bind("touchstart mousedown", function(e) {
 		play_se();
-		box_se.style.color = "green";
+		$("#box_se").style.color = "green";
 		e.stopPropagation();
 		e.preventDefault();
 	});
 	$("#box_se").bind("touchend mouseup", function(e) {
 		pause_se();
-		box_se.style.color = "orange";
+		$("#box_se").style.color = "orange";
 		e.stopPropagation();
 		e.preventDefault();
 	});
 	$("#box_ne").bind("touchstart mousedown", function(e) {
 		play_ne();
-		box_ne.style.color = "purple";
+		$("#box_ne").style.color = "purple";
 		e.stopPropagation();
 		e.preventDefault();
 	});
 	$("#box_ne").bind("touchend mouseup", function(e) {
 		pause_ne();
-		box_ne.style.color = "red";
+		$("#box_ne").style.color = "red";
 		e.stopPropagation();
 		e.preventDefault();
 	});
 	$("#box_sw").bind("touchstart mousedown", function(e) {
 		play_sw();
-		box_sw.style.color = "red";
+		$("#box_sw").style.color = "red";
 		e.stopPropagation();
 		e.preventDefault();
 	});
 	$("#box_sw").bind("touchend mouseup", function(e) {
 		pause_sw();
-		box_sw.style.color = "purple";
+		$("#box_sw").style.color = "purple";
 		e.stopPropagation();
 		e.preventDefault();
 	});
@@ -154,6 +156,11 @@
 	 * FUNCTIONS
 	 */
 	function play_se() {
+		//Creation
+		osc_se = T("konami");
+		env_se = T("adsr", {a:500, d:500, s:1, r:1500});
+		oe_se = T("OscGen", {osc:osc_se, env:env_se, mul:0.4}).play();
+
 		//oe_se.allNoteOff();
 		var n = pitches_se[Math.floor(Math.random()*pitches_se.length)] - 36;
 		//var n = Math.floor(Math.random()*12 + 62-24);
@@ -177,6 +184,19 @@
 	}
 
 	function play_nw() {
+		//Creation: synth
+		osc_nw = T("konami");
+		env_nw = T("adsr", {a:10, d:300, s:0.25, r:700});
+		oe_nw = T("OscGen", {osc:osc_nw, env:env_nw, mul:0.4}).play();
+
+		//Creation: timer
+		timer_nw = T("interval", {interval:interval_nw}, function(count) {
+				//oe.noteOff(noteNum); //last noteNum from prev interval bang
+				var noteNum = pitches_nw[Math.floor(Math.random()*pitches_nw.length)] - (12*Math.floor(Math.random()*4));
+				var velocity = Math.random()*50 + 50;
+				oe_nw.noteOn(noteNum, velocity);
+		});
+
 		//if (!timerOn) {
 			timer_nw.start();
 		//}
@@ -189,6 +209,28 @@
 	}
 
 	function play_ne() {
+		//Creation: synth
+		 osc_ne = T("sin");
+		// env_ne = T("adsr", {a:100,d:250,s:0.6,r:500});
+		 env_ne = T("adsr", {a:50, d:300, s:0.1, r:500});
+		// env_ne = T("perc", {a:50, r:300});
+		 oe_ne = T("OscGen", {osc:osc_ne, env:env_ne, mul:0.5}).play();
+		 delay_ne = T("delay", {time:500, fb:0, mix:0.5}, oe_ne).play();
+		 delay_ne_2 = T("delay", {time:750, fb:0, mix:0.25}, oe_ne).play();
+
+		//Creation: timer
+		timer_ne = T("interval", {interval:interval_ne}, function(count) {
+				//oe_ne.allNoteOff();
+				var noteNum = pitches_ne[Math.floor(Math.random()*pitches_ne.length)] +12; //+ (12*Math.floor(Math.random()*2));
+				var velocity = Math.random()*50 + 50;
+				oe_ne.noteOn(noteNum, velocity);
+				/*setTimeout(function() {
+					oe_ne.noteOff(noteNum);
+					console.log(noteNum+" off");
+				}, interval_ne*1.1);*/
+		});
+
+
 		//if (!timerOn) {
 			timer_ne.start();
 		//}
@@ -201,6 +243,12 @@
 	}
 
 	function play_sw() {
+		//Creation
+		osc_sw = T("sin");
+		env_sw = T("adsr", {a:300, d:500, s:1, r:2000});
+		oe_sw = T("OscGen", {osc:osc_sw, env:env_sw, mul:0.75}).play();
+
+
 		var n = pitches_sw[Math.floor(Math.random()*pitches_sw.length)];
 		//var n = Math.floor(Math.random()*12 + 62-24);
 		var v = Math.random()*20 + 80;
