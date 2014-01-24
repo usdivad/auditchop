@@ -206,13 +206,6 @@
 		env_nw = T("adsr", {a:10, d:300, s:0.25, r:700});
 		oe_nw = T("OscGen", {osc:osc_nw, env:env_nw, mul:0.4}).play();
 
-		//Creation: timer
-		timer_nw = T("interval", {interval:interval_nw}, function(count) {
-				//oe.noteOff(noteNum); //last noteNum from prev interval bang
-				var noteNum = pitches_nw[Math.floor(Math.random()*pitches_nw.length)] - (12*Math.floor(Math.random()*4));
-				var velocity = Math.random()*50 + 50;
-				oe_nw.noteOn(noteNum, velocity);
-		});
 
 		//if (!timerOn) {
 			timer_nw.start();
@@ -234,18 +227,6 @@
 		 oe_ne = T("OscGen", {osc:osc_ne, env:env_ne, mul:0.5}).play();
 		 delay_ne = T("delay", {time:500, fb:0, mix:0.5}, oe_ne).play();
 		 delay_ne_2 = T("delay", {time:750, fb:0, mix:0.25}, oe_ne).play();
-
-		//Creation: timer
-		timer_ne = T("interval", {interval:interval_ne}, function(count) {
-				//oe_ne.allNoteOff();
-				var noteNum = pitches_ne[Math.floor(Math.random()*pitches_ne.length)] +12; //+ (12*Math.floor(Math.random()*2));
-				var velocity = Math.random()*50 + 50;
-				oe_ne.noteOn(noteNum, velocity);
-				/*setTimeout(function() {
-					oe_ne.noteOff(noteNum);
-					console.log(noteNum+" off");
-				}, interval_ne*1.1);*/
-		});
 
 
 		//if (!timerOn) {
