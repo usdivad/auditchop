@@ -2,7 +2,7 @@
 	 * SYNTHS
 	 *
 	 */
-(function () {
+(function() {
 	//NW
 	var osc_nw = T("konami");
 	var env_nw = T("adsr", {a:10, d:300, s:0.25, r:700});
